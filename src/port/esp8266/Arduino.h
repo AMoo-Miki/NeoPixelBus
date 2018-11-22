@@ -12,7 +12,6 @@
 #include <cstdint>
 #include <cmath>
 #include <cstring>
-#include <sys/time.h>
 
 // disbale SPI code branch
 #define __AVR_ATtiny85__
@@ -37,6 +36,8 @@ typedef std::string  String;
 extern "C" {
 #endif // __cplusplus
 
+extern uint32_t esp_get_time();
+
 inline uint8_t pgm_read_byte(const void* p) {
     return *(const uint8_t*)(p);
 }
@@ -45,16 +46,11 @@ inline uint16_t pgm_read_dword(const void* p) {
     return *(const uint16_t*)(p);
 }
 
-inline unsigned long micros() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return 1000000 * tv.tv_sec + tv.tv_usec;
+inline uint32_t micros() {
+    return esp_get_time();
 }
-
-inline unsigned long millis() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (tv.tv_sec * 1000L) + (tv.tv_usec / 1000L);
+inline uint32_t millis() {
+    return micros() / 1000L;
 }
 
 #ifdef __cplusplus
