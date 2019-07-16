@@ -1,5 +1,6 @@
-# NeoPixelBus - ESP8266 RTOS
-This fork of [NeoPixelBus](https://github.com/Makuna/NeoPixelBus) can be used as component under your [EPS8266_RTOS ESP-IDF](https://github.com/espressif/ESP8266_RTOS_SDK) style project.
+# NeoPixelBus
+
+[![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6AA97KE54UJR4)
 
 Arduino NeoPixel library
 
