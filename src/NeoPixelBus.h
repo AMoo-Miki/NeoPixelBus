@@ -46,6 +46,7 @@ License along with NeoPixel.  If not, see
 
 #include "internal/NeoColorFeatures.h"
 #include "internal/DotStarColorFeatures.h"
+#include "internal/Lpd8806ColorFeatures.h"
 
 #include "internal/Layouts.h"
 #include "internal/NeoTopology.h"
@@ -63,29 +64,28 @@ License along with NeoPixel.  If not, see
 #include "internal/NeoEase.h"
 #include "internal/NeoGamma.h"
 
+#include "internal/DotStarGenericMethod.h"
+#include "internal/Lpd8806GenericMethod.h"
+
 #if defined(ARDUINO_ARCH_ESP8266)
 
 #include "internal/NeoEsp8266DmaMethod.h"
 #include "internal/NeoEsp8266UartMethod.h"
 #include "internal/NeoEspBitBangMethod.h"
-#include "internal/DotStarGenericMethod.h"
 
 #elif defined(ARDUINO_ARCH_ESP32)
 
 #include "internal/NeoEsp32I2sMethod.h"
 #include "internal/NeoEsp32RmtMethod.h"
 #include "internal/NeoEspBitBangMethod.h"
-#include "internal/DotStarGenericMethod.h"
 
 #elif defined(__arm__) // must be before ARDUINO_ARCH_AVR due to Teensy incorrectly having it set
 
 #include "internal/NeoArmMethod.h"
-#include "internal/DotStarGenericMethod.h"
 
 #elif defined(ARDUINO_ARCH_AVR)
 
 #include "internal/NeoAvrMethod.h"
-#include "internal/DotStarAvrMethod.h"
 
 #elif defined(CONFIG_TARGET_PLATFORM_ESP8266) || defined(CONFIG_IDF_TARGET_ESP8266)
 
@@ -95,9 +95,7 @@ License along with NeoPixel.  If not, see
 #error "Platform Currently Not Supported, please add an Issue at Github/Makuna/NeoPixelBus"
 #endif
 
-#if !defined(__AVR_ATtiny85__)
-#include "internal/DotStarSpiMethod.h"
-#endif
+
 
 
 template<typename T_COLOR_FEATURE, typename T_METHOD> class NeoPixelBus
