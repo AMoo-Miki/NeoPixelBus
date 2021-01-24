@@ -85,6 +85,8 @@ License along with NeoPixel.  If not, see
 #include "internal/NeoEase.h"
 #include "internal/NeoGamma.h"
 
+#include "internal/NeoBusChannel.h"
+
 #include "internal/DotStarGenericMethod.h"
 #include "internal/Lpd8806GenericMethod.h"
 #include "internal/Lpd6803GenericMethod.h"
@@ -124,8 +126,6 @@ License along with NeoPixel.  If not, see
 #endif
 
 
-
-
 template<typename T_COLOR_FEATURE, typename T_METHOD> class NeoPixelBus
 {
 public:
@@ -136,6 +136,13 @@ public:
         _countPixels(countPixels),
         _state(0),
         _method(pin, countPixels, T_COLOR_FEATURE::PixelSize, T_COLOR_FEATURE::SettingsSize)
+    {
+    }
+
+    NeoPixelBus(uint16_t countPixels, uint8_t pin, NeoBusChannel channel) :
+        _countPixels(countPixels),
+        _state(0),
+        _method(pin, countPixels, T_COLOR_FEATURE::PixelSize, T_COLOR_FEATURE::SettingsSize, channel)
     {
     }
 
